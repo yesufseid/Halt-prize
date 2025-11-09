@@ -12,6 +12,7 @@ interface Student {
 }
 
 export default function TeamsPage() {
+
   const [students, setStudents] = useState<Student[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -48,24 +49,10 @@ export default function TeamsPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="border-b border-border">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">HP</span>
-            </div>
-            <span className="text-lg font-semibold">Hult Prize AASTU</span>
-          </Link>
-          <Link
-            href="/form"
-            className="bg-primary text-white px-6 py-2 rounded-full font-medium hover:bg-primary/90 transition"
-          >
-            Join Team
-          </Link>
-        </nav>
-      </header>
-
-      {/* Content */}
+     
+         <p  className="text-pink-600 font-bold text-xl justify-center text-center py-32">Your matches are on their way!
+Check back soon!</p>
+      {/* Content
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
         <div className="space-y-2 mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold">Registered Members</h1>
@@ -125,7 +112,7 @@ export default function TeamsPage() {
             ))}
           </div>
         )}
-      </section>
+      </section> */}
 
       {/* Footer */}
       <footer className="border-t border-border mt-24">

@@ -59,8 +59,8 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: () => void })
 
   const onSubmitForm = async (data: RegistrationData) => {
     // Validate minimum UN SDGs
-    if (data.unSdgs.length < 3) {
-      alert("Please select at least 3 UN SDGs")
+    if (data.unSdgs.length > 3) {
+      alert("Please select max  3 UN SDGs")
       return
     }
 
@@ -185,13 +185,20 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: () => void })
     </option>
     <option value="Software">Software</option>
     <option value="Civil">Civil</option>
-    <option value="Electrical">Electrical</option>
+    <option value="Electrical">Electrical and Computer </option>
     <option value="Architecture">Architecture</option>
     <option value="Environmental">Environmental</option>
     <option value="Chemical">Chemical</option>
     <option value="Mining">Mining</option>
     <option value="Electro Mechanical">Electro Mechanical</option>
-    <option value="Applied">Applied</option>
+    <option value="Mechanical">Mechanical</option>
+     <option value="Biotechnology">Biotechnology</option>
+          <option value="Geology">Geology</option>
+     <option value=" Food Science and Applied Nutrition"> Food Science and Applied Nutrition</option>
+     <option value="Industrial Chemistry">Industrial Chemistry</option>
+
+     <option value="Maths-Physics-Statistics">Maths-Physics-Statistics</option>
+
   </select>
 
   {errors.department && (
@@ -243,7 +250,11 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: () => void })
           {TEAM_ROLES.map((role) => (
             <label key={role} className="flex items-center gap-3 cursor-pointer">
               <input
-                {...register("teamRoles")}
+                 {...register("teamRoles", {
+                  required:"Team roles is required",
+                validate: (value) =>
+              value && value.length < 3 ? true : "Please select max 3",
+          })}
                 type="checkbox"
                 value={role}
                 className="w-4 h-4 border border-border rounded focus:ring-2 focus:ring-primary"
@@ -251,6 +262,11 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: () => void })
               <span className="text-sm">{role}</span>
             </label>
           ))}
+          {errors.teamRoles && (
+          <p className="text-red-500 text-sm mt-2">
+            {errors.teamRoles.message}
+          </p>
+        )}
         </div>
       </fieldset>
 
@@ -285,8 +301,9 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: () => void })
           type="checkbox"
           value={goal}
           {...register("unSdgs", {
+            required:"sdg goal is requaired",
             validate: (value) =>
-              value && value.length > 0 ? true : "Please select at least one SDG",
+              value && value.length < 3 ? true : "Please select max 3 SDG",
           })}
           className="w-4 h-4 border border-border rounded focus:ring-2 focus:ring-primary"
         />
@@ -308,7 +325,11 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: () => void })
           {SKILLS.map((skill) => (
             <label key={skill} className="flex items-center gap-3 cursor-pointer">
               <input
-                {...register("skills")}
+                 {...register("skills", {
+                  required:"skills is required",
+                validate: (value) =>
+              value && value.length < 3 ? true : "Please select max 3",
+          })}
                 type="checkbox"
                 value={skill}
                 className="w-4 h-4 border border-border rounded focus:ring-2 focus:ring-primary"
@@ -316,6 +337,11 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: () => void })
               <span className="text-sm">{skill}</span>
             </label>
           ))}
+          {errors.teamRoles && (
+          <p className="text-red-500 text-sm mt-2">
+            {errors.skills.message}
+          </p>
+        )}
         </div>
       </fieldset>
 

@@ -31,22 +31,11 @@ export default function FormPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      {/* Header */}
-      <header className="border-b border-border">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">HP</span>
-            </div>
-            <span className="text-lg font-semibold">Hult Prize AASTU</span>
-          </Link>
-        </nav>
-      </header>
 
       {/* Form Section */}
       <section className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
         <div className="space-y-2 mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold">Join Our Community</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold text-pink-600">Find your Team</h1>
           <p className="text-muted-foreground">Tell us about yourself and find your perfect team</p>
         </div>
         <RegistrationForm onSubmit={() => setSubmitted(true)} />
