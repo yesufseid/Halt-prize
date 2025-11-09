@@ -1,20 +1,23 @@
 import React from 'react'
-import logo from"@/public/Paucek and Lage_20251109_063716_0000 (2).png"
+import logo from"@/public/logo.png"
 import { FaTelegramPlane, FaInstagram, FaTiktok, FaLinkedin } from "react-icons/fa";
 import Link from "next/link"
 import Image from "next/image";
 export default function Header() {
   return (
-    <header className="border-b border-border py-5">
+    <header className="border-b border-border py-2">
             <nav className="max-w-7xl lg:mx-auto lg:px-4 sm:px-0   flex   items-center justify-between">
-                <Link href={"/"} >
-              <div className="flex items-center gap-2 ml-3">
-                <div className=" flex items-center ">
-                   <Image src={logo} alt="Logo" width={50} height={50} />
-                </div>
-                <span className="lg:text-2xl text-xl font-semibold">Hult Prize <br className="flex lg:hidden" /> AASTU</span>
-              </div>
-               </Link>
+               <Link href={"/"} > <div className="flex items-center gap-2 ml-3"> 
+                <div className=" flex items-center "> 
+                  <Image src={logo} alt="Logo" width={70} height={70} /> </div>
+                      <div className="flex flex-col">
+      {/* <span className="text-xl lg:text-2xl font-semibold leading-snug">
+        Hult Prize <span className="lg:hidden"><br /></span> AASTU
+      </span> */}
+      <span className="text-xl lg:text-2xl font-semibold leading-snug">Team Up</span>
+    </div>
+                      </div> 
+                      </Link>
                 <a
             href="https://t.me/ContactHultprizeAASTU"
             target="_blank"

@@ -11,29 +11,10 @@ import { FaTelegramPlane, FaInstagram, FaTiktok, FaLinkedin } from "react-icons/
 export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground">
-      {/* Header */}
-      {/* <header className="border-b border-border py-5">
-        <nav className="max-w-7xl lg:mx-auto lg:px-4 sm:px-0   flex   items-center justify-between">
-          <div className="flex items-center gap-2 ml-3">
-            <div className=" flex items-center ">
-               <Image src={logo} alt="Logo" width={50} height={50} />
-            </div>
-            <span className="lg:text-2xl text-xl font-semibold">Hult Prize <br className="flex lg:hidden" /> AASTU</span>
-          </div>
-            <a
-        href="https://t.me/ContactHultprizeAASTU"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-black text-xl hover:text-[#0088cc] mr-5 lg:mr-10 transition flex justify-center items-center gap-2"
-      >
-        <FaTelegramPlane  className="w-10 h-10 hidden lg:flex" />
-        <span>Contact Us</span>
-      </a>
-        </nav>
-      </header> */}
+  
 
       {/* Hero Section */}
-      <section  className="relative bg-[url('/hero.jpg')] bg-cover bg-center bg-no-repeat px-4 sm:px-6 lg:px-8 py-16 lg:py-12 " >
+      <section  className="relative bg-[url('/hero.jpg')] bg-cover bg-center bg-no-repeat px-4 sm:px-6 lg:px-8 py-24 lg:py-20 " >
         <div className="text-center space-y-2">
           <h1 className="text-4xl sm:text-6xl font-bold text-balance leading-tight">
             Build the Future <br /> with Your Team
