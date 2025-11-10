@@ -2,119 +2,147 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import { getTeamsByStudentId } from "@/lib/teammet"
 
-interface Student {
+
+type Student = {
   id: string
-  fullName: string
+  student_id: string
+  full_name: string
   department: string
-  teamRoles: string[]
+  batch: string
+  sdgs: string[]
   skills: string[]
+  preferred_team_size: number,
+  roles:string[],
+  phone:string
+
 }
+type students={
+    students:Student
+}
+type Team = {
+  id: string
+  name: string
+preferred_size: number
+  team_members: students[]
+}
+const MemberCard: React.FC<{ member:students }> = ({ member }) => {
+    
+  return (
+    <div className="border rounded-lg p-3 bg-gray-50">
+      <h3 className="font-semibold">{member.students.full_name}</h3>
+      {member.students.id && <p>ID: {member.students.student_id}</p>}
+      <p>Department: {member.students.department}</p>
+      <p>Batch: {member.students.batch}</p>
+      <p>phone: {member.students.phone}</p>
+      <p>Id: {member.students.student_id}</p>
 
+      {member.students.roles && member.students.roles.length > 0 && (
+        <div className="mt-1">
+          <p className="font-semibold">Roles:</p>
+          <ul className="list-disc list-inside text-sm">
+            {member.students.roles.map((role, idx) => (
+              <li key={idx}>{role}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {member.students.sdgs&& member.students.sdgs.length > 0 && (
+        <div className="mt-1">
+          <p className="font-semibold">UN SDGs:</p>
+          <ul className="list-disc list-inside text-sm">
+            {member.students.sdgs.map((sdg, idx) => (
+              <li key={idx}>{sdg}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+// TeamCard component
+const TeamCard: React.FC<{ team: Team }> = ({ team }) => {
+    console.log(team);
+    
+  const isFull = team?.team_members?.length >= team?.preferred_size;
+
+  return (
+    <div className={`border rounded-xl shadow-md mx-auto lg:w-[800px] p-4 bg-white ${isFull ? "" : "border-yellow-500"}`}>
+      <h2 className="text-xl font-bold mb-2">{team?.name}</h2>
+      <p className="text-sm text-gray-500 mb-2">Preferred Size: {team?.preferred_size}</p>
+      {!isFull && <p className="text-yellow-600 font-semibold mb-2">Team is not full yet!</p>}
+
+      <div className="space-y-3">
+        {team?.team_members.map((member:students) => (
+          <MemberCard key={member.students.id} member={member} />
+        ))}
+      </div>
+    </div>
+  );
+};
 export default function TeamsPage() {
-
-  const [students, setStudents] = useState<Student[]>([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    // Load students from localStorage
-    const saved = localStorage.getItem("students")
-    if (saved) {
-      const parsed = JSON.parse(saved)
-      setStudents(parsed)
+  const [students, setStudents] = useState<Team[]>([])
+  const [noteam, setNoteam] = useState(false)
+  const [studentId, setStudentId] = useState("");
+  const [loading, setLoading] = useState(false)
+  
+   const isValidFormat = /^ETS\d{4}\/\d{2}$/.test(studentId);
+  const handle=async()=>{
+    setLoading(true)
+    setNoteam(false)
+    const data:any=await getTeamsByStudentId(studentId)
+    if(data.length===0){
+      setStudents(data)
+      setNoteam(true)
+    }else{
+      setStudents(data)
     }
     setLoading(false)
-  }, [])
-
-  if (loading) {
-    return (
-      <main className="min-h-screen bg-background text-foreground">
-        <header className="border-b border-border">
-          <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">HP</span>
-              </div>
-              <span className="text-lg font-semibold">Hult Prize AASTU</span>
-            </Link>
-          </nav>
-        </header>
-        <div className="flex items-center justify-center min-h-[calc(100vh-80px)]">
-          <p className="text-muted-foreground">Loading...</p>
-        </div>
-      </main>
-    )
   }
+
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      {/* Header */}
-     
-         <p  className="text-pink-600 font-bold text-xl justify-center text-center py-32">Your matches are on their way!
-Check back soon!</p>
-      {/* Content
+       <div
+      className="max-w-md mx-auto bg-white p-6 rounded-2xl shadow-md space-y-4"
+    >
+      <h2 className="text-xl font-semibold text-gray-800 text-center">
+        Enter Student ID
+      </h2>
+
+      <input
+        type="text"
+        value={studentId}
+        onChange={(e) => setStudentId(e.target.value.toUpperCase())}
+        placeholder="ETS****/**"
+        className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400"
+        pattern="^ETS\d{4}/\d{2}$"
+        required
+      />
+
+
+      <button
+        type="submit"
+         onClick={handle}
+ disabled={!isValidFormat}
+        className={`w-full font-semibold py-2 rounded-lg transition ${
+          isValidFormat
+            ? "bg-amber-400 text-white hover:bg-amber-500"
+            : "bg-gray-300 text-gray-500 cursor-not-allowed"
+        }`}      >
+          Search Teams{loading&&"..."}
+      </button>
+    </div>
+       
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
-        <div className="space-y-2 mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold">Registered Members</h1>
-          <p className="text-muted-foreground">
-            {students.length} {students.length === 1 ? "student" : "students"} registered
-          </p>
-        </div>
+       {students.length>0&& <TeamCard  key={students[0].id} team={students&&students[0]} />}
+       {noteam&&  <p  className="text-pink-600 font-bold text-xl justify-center text-center py-32">Your matches are on their way!
+Check back soon!</p>}
+      </section> 
 
-        {students.length === 0 ? (
-          <div className="text-center py-12 space-y-4">
-            <p className="text-muted-foreground text-lg">No members registered yet</p>
-            <Link
-              href="/form"
-              className="bg-primary text-white px-6 py-2 rounded-full font-medium hover:bg-primary/90 transition inline-block"
-            >
-              Be the First to Register
-            </Link>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {students.map((student) => (
-              <div
-                key={student.id}
-                className="border border-border rounded-lg p-6 space-y-4 hover:shadow-md transition"
-              >
-                <div>
-                  <h3 className="text-xl font-semibold">{student.fullName}</h3>
-                  <p className="text-sm text-muted-foreground">{student.department}</p>
-                </div>
-
-                {student.teamRoles && student.teamRoles.length > 0 && (
-                  <div>
-                    <p className="text-sm font-medium mb-2">Team Roles</p>
-                    <div className="flex flex-wrap gap-2">
-                      {student.teamRoles.map((role) => (
-                        <span key={role} className="bg-secondary text-sm px-2 py-1 rounded-full text-foreground">
-                          {role}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {student.skills && student.skills.length > 0 && (
-                  <div>
-                    <p className="text-sm font-medium mb-2">Skills</p>
-                    <div className="flex flex-wrap gap-2">
-                      {student.skills.map((skill) => (
-                        <span key={skill} className="bg-primary/10 text-primary text-sm px-2 py-1 rounded-full">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-      </section> */}
-
-      {/* Footer */}
+     
       <footer className="border-t border-border mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-muted-foreground text-sm">
           <p>&copy; 2025 Hult Prize AASTU. Building solutions for a better world.</p>
