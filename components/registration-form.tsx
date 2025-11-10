@@ -142,13 +142,13 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: () => void })
   required: "ID number is required",
   pattern: {
     value: /^ETS\d{4}\/\d{2}$/,
-    message: "ID must be in the format ETS1450/14",
+    message: "ID must be in the format( use capital letters) ETS****/**",
   },
 })}
               type="text"
               id="idNumber"
               className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              placeholder="ETS1450/14"
+              placeholder="ETS****/**"
             />
             {errors.idNumber && <p className="text-red-500 text-sm mt-1">{errors.idNumber.message}</p>}
           </div>
@@ -244,7 +244,7 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: () => void })
       {/* Team Roles */}
       <fieldset className="space-y-4">
         <legend className="text-lg font-semibold mb-4">
-          Team Roles <span className="text-red-500">*</span>
+          Team Roles(select max 3) <span className="text-red-500">*</span>
         </legend>
         <div className="space-y-3">
           {TEAM_ROLES.map((role) => (
@@ -253,7 +253,7 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: () => void })
                  {...register("teamRoles", {
                   required:"Team roles is required",
                 validate: (value) =>
-              value && value.length < 3 ? true : "Please select max 3",
+              value && value.length < 4 ? true : "Please select max 3",
           })}
                 type="checkbox"
                 value={role}
@@ -273,7 +273,7 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: () => void })
       {/* UN SDGs */}
         <fieldset className="mt-4">
   <legend className="block text-sm font-medium mb-2">
-    Sustainable Development Goals (SDGs) <span className="text-red-500">*</span>
+    Sustainable Development Goals (SDGs select max 3)  <span className="text-red-500">*</span>
   </legend>
 
   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -303,7 +303,7 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: () => void })
           {...register("unSdgs", {
             required:"sdg goal is requaired",
             validate: (value) =>
-              value && value.length < 3 ? true : "Please select max 3 SDG",
+              value && value.length < 4 ? true : "Please select max 3 SDG",
           })}
           className="w-4 h-4 border border-border rounded focus:ring-2 focus:ring-primary"
         />
@@ -319,7 +319,7 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: () => void })
       {/* Skills */}
       <fieldset className="space-y-4">
         <legend className="text-lg font-semibold mb-4">
-          Skills <span className="text-red-500">*</span>
+          Skills (select max 3) <span className="text-red-500">*</span>
         </legend>
         <div className="space-y-3">
           {SKILLS.map((skill) => (
@@ -328,7 +328,7 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: () => void })
                  {...register("skills", {
                   required:"skills is required",
                 validate: (value) =>
-              value && value.length < 3 ? true : "Please select max 3",
+              value && value.length < 4 ? true : "Please select max 3",
           })}
                 type="checkbox"
                 value={skill}
@@ -337,9 +337,9 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: () => void })
               <span className="text-sm">{skill}</span>
             </label>
           ))}
-          {errors.teamRoles && (
+          {errors.skills && (
           <p className="text-red-500 text-sm mt-2">
-            {errors.skills.message}
+            {errors?.skills?.message}
           </p>
         )}
         </div>
