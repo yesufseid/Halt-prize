@@ -1,14 +1,17 @@
+"use client"
 import Link from "next/link"
 import Image from "next/image";
-import logo from"@/public/Paucek and Lage_20251109_063716_0000 (2).png"
-import b1 from "@/public/1.png"
+ import b1 from "@/public/1.png"
 import b2 from "@/public/2.jpg"
 import b3 from "@/public/3.png"
 import b4 from "@/public/4.png"
+
 import { FaTelegramPlane, FaInstagram, FaTiktok, FaLinkedin } from "react-icons/fa";
 
 
 export default function Home() {
+  
+
   return (
     <main className="min-h-screen bg-background text-foreground">
   
