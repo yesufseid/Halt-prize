@@ -71,7 +71,7 @@ const Handlegenerat=async()=>{
       <span className="px-4 py-2 text-white bg-amber-400 rounded-full font-semibold">
         {allnumber?.allstudent}
       </span>
-      <div className="flex space-x-2 overflow-x-auto">
+      <div className="flex space-x-2 max-w-[800px] overflow-x-auto">
         {allnumber?.unsign.map((t, index) => (
           <span
             key={index}
