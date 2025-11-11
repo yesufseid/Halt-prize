@@ -100,13 +100,27 @@ export async function formTeams() {
 
   // 4️⃣ Form new teams or join existing ones
   for (const student of unassigned) {
-    let compatibleTeam =
-      existingTeams.find(
-        (t) => isCompatible(t, student) && t.members.length < t.preferredSize
-      ) ||
-      newTeams.find(
-        (t) => isCompatible(t, student) && t.members.length < t.preferredSize
-      );
+    // let compatibleTeam =
+    //   existingTeams.find(
+    //     (t) => isCompatible(t, student) && t.members.length < t.preferredSize
+    //   ) ||
+    //   newTeams.find(
+    //     (t) => isCompatible(t, student) && t.members.length < t.preferredSize
+    //   );
+    // Inside your for (const student of unassigned) loop:
+let compatibleTeam =
+  existingTeams.find(
+    (t) =>
+      isCompatible(t, student) &&
+      t.members.length < t.preferredSize &&
+      t.preferredSize === student.preferred_team_size // ✅ only join same-size team
+  ) ||
+  newTeams.find(
+    (t) =>
+      isCompatible(t, student) &&
+      t.members.length < t.preferredSize &&
+      t.preferredSize === student.preferred_team_size // ✅ only join same-size team
+  );
  // ✅ If team is full, skip and create new one
     if (compatibleTeam && compatibleTeam.members.length >= compatibleTeam.preferredSize) {
       console.log(`⚠️ ${compatibleTeam.name} is full. Creating a new team for ${student.full_name}.`);
