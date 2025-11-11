@@ -17,7 +17,8 @@ export async function getTeamsWithMembers() {
           batch,
           sdgs,
           skills,
-          preferred_team_size
+          preferred_team_size,
+          phone
 
         )
       )

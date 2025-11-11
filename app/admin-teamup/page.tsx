@@ -15,7 +15,8 @@ type Student = {
   sdgs: string[]
   skills: string[]
   preferred_team_size: number,
-  roles:string[]
+  roles:string[],
+  phone:string
 
 }
 type students={

@@ -10,7 +10,8 @@ type Student = {
   sdgs: string[]
   skills: string[]
   preferred_team_size: number,
-  roles:string[]
+  roles:string[],
+  phone:string
 
 }
 
@@ -34,6 +35,7 @@ const MemberCard: React.FC<{ member:students }> = ({ member }) => {
       {member.students.id && <p>ID: {member.students.student_id}</p>}
       <p>Department: {member.students.department}</p>
       <p>Batch: {member.students.batch}</p>
+      <p>phone: {member.students.phone}</p>
 
       {member.students.roles && member.students.roles.length > 0 && (
         <div className="mt-1">
