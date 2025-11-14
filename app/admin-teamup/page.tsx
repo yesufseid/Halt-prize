@@ -5,6 +5,7 @@ import TeamList from '../../components/TeamList'
 import {getTeamsWithMembers} from '@/lib/GetallTeams'
 import {formTeams} from "@/lib/TeamMaker"
 import { findunsigned } from '@/lib/findunsignedstudent'
+import Link from 'next/link'
 
 type Student = {
   id: string
@@ -66,13 +67,17 @@ const Handlegenerat=async()=>{
       >
        {loading?"loading...":"generate team"} 
       </button>
+      <Link 
+               className=" bg-primary  px-3 ml-3 cursor-pointer w-32 text-white py-3 rounded-lg font-medium hover:bg-primary/90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+
+      href={"/admin-teamup/generat"} >ADD Team</Link>
   {/* Top Stats Section */}
   <div className="flex flex-col mt-2 md:flex-row items-center justify-between mb-8 gap-4">
     <div className="flex items-center gap-4">
       <span className="px-4 py-2 text-white bg-amber-400 rounded-full font-semibold">
         {allnumber?.allstudent}
       </span>
-      <div className="flex space-x-2 max-w-[800px] overflow-x-auto">
+      <div className="flex space-x-2 max-w-full lg:max-w-[800px] overflow-x-auto">
         {allnumber?.unsign.map((t, index) => (
           <span
             key={index}
