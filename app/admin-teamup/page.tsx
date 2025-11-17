@@ -60,7 +60,7 @@ const Handlegenerat=async()=>{
       setControl(!contol)
 }
   return (
-     <div className="min-h-screen bg-gray-100 p-6">
+     <div className="min-h-screen bg-gray-100 md:p-6">
       <button
         onClick={Handlegenerat}
         className=" bg-primary  cursor-pointer w-32 text-white py-3 rounded-lg font-medium hover:bg-primary/90 transition disabled:opacity-50 disabled:cursor-not-allowed"
@@ -71,24 +71,27 @@ const Handlegenerat=async()=>{
                className=" bg-primary  px-3 ml-3 cursor-pointer w-32 text-white py-3 rounded-lg font-medium hover:bg-primary/90 transition disabled:opacity-50 disabled:cursor-not-allowed"
 
       href={"/admin-teamup/generat"} >ADD Team</Link>
-  {/* Top Stats Section */}
-  <div className="flex flex-col mt-2 md:flex-row items-center justify-between mb-8 gap-4">
-    <div className="flex items-center gap-4">
-      <span className="px-4 py-2 text-white bg-amber-400 rounded-full font-semibold">
-        {allnumber?.allstudent}
-      </span>
-      <div className="flex space-x-2 max-w-full lg:max-w-[800px] overflow-x-auto">
-        {allnumber?.unsign.map((t, index) => (
-          <span
-            key={index}
-            className="px-3 py-1 bg-white border border-gray-300 rounded-lg shadow-sm flex-0"
-          >
-            {t}
-          </span>
-        ))}
-      </div>
+ 
+  <div className="flex flex-col mt-2 md:flex-row items-center mb-8 gap-4">
+  <div className="flex items-center gap-4 w-full">
+    <span className="px-4 py-2 text-white bg-amber-400 rounded-full font-semibold whitespace-nowrap">
+      {allnumber?.allstudent}
+    </span>
+
+    {/* HORIZONTAL SCROLL */}
+    <div className="flex overflow-x-auto space-x-2 max-w-full scrollbar-thin whitespace-nowrap">
+      {allnumber?.unsign?.map((t, index) => (
+        <span
+          key={index}
+          className="px-3 py-1 bg-white border border-gray-300 rounded-lg shadow-sm inline-block"
+        >
+          {t}
+        </span>
+      ))}
     </div>
   </div>
+</div>
+
 
   {/* Heading */}
   <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">

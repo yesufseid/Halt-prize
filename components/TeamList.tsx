@@ -88,7 +88,7 @@ const TeamList: React.FC<{ teams: Team[] }> = ({ teams }) => {
     console.log(teams);
     
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 p-4">
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 p-0 md:p-4">
       {teams.map((team) => (
         <TeamCard key={team.id} team={team} />
       ))}
